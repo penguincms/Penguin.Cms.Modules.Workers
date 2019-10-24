@@ -1,0 +1,21 @@
+﻿@model List<LogEntry>
+
+@{
+	ViewBag.Title = "Logs";
+	Layout = "_Layout";
+}
+<table>
+    <tr>
+        <th>Message</th>
+        <th>Logged</th>
+        <th>Result</th>
+    </tr>
+    @foreach (LogEntry Entry in Model.OrderBy(l => l.DateCreated))
+	{
+    <tr>
+        <td>@Entry.Value</td>
+        <td>@Entry.DateCreated</td>
+        <td>@Entry.Level.ToString()</td>
+    </tr>
+	}
+</table>

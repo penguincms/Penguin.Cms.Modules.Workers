@@ -1,0 +1,30 @@
+﻿@model List<IWorker>
+@using Penguin.Workers.Abstractions
+
+@{
+	Layout = "_Layout";
+}
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Last Run</th>
+        <th>Run</th>
+    </tr>
+    @foreach (IWorker thisWorker in Model)
+	{
+    <tr>
+        <td>
+            <a href="@Url.Action("Log", "Worker", new { area="admin", WorkerType = @thisWorker.GetType().ToString()})">@thisWorker.GetType().Name</a>
+        </td>
+        <td>@(thisWorker.IsBusy ? "Busy" : "Free")</td>
+        <td>@thisWorker.LastRun</td>
+        <td>
+            <a href="@Url.Action("Run", "Worker", new { area="admin", WorkerName = thisWorker.GetType().FullName})" onclick="Site.ShowLoader();">
+                @Html.MaterialIcon("play_arrow")
+            </a>
+        </td>
+    </tr>
+	}
+</table>

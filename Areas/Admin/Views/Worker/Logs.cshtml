@@ -1,0 +1,30 @@
+﻿@model List<LogEntry>
+
+@{
+	ViewBag.Title = "Logs";
+	Layout = "_Layout";
+}
+
+<table>
+    <tr>
+        <th>Caller</th>
+        <th>Session</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Result</th>
+    </tr>
+    @foreach (IGrouping<string, LogEntry> Session in Model.OrderByDescending(l => l.DateCreated).GroupBy(s => s.Session))
+	{
+    <tr>
+        <td>
+            <a href="@Url.Action("Log", "Worker", new { area="admin", WorkerType = Session.First().Caller})">@Session.First().Caller.FromLast(".")</a>
+        </td>
+        <td>
+            <a href="@Url.Action("LogSessions", "Worker", new {area="admin", Session = Session.Key})">**-@Session.Key.FromLast("-")</a>
+        </td>
+        <td>@Session.Min(s => s.DateCreated)</td>
+        <td>@Session.Max(s => s.DateCreated)</td>
+        <td>@Session.Max(s => s.Level)</td>
+    </tr>
+	}
+</table>
