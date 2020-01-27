@@ -16,7 +16,7 @@
     <PackageReference Include="Penguin.Cms.Logging" Version="2.0.3-T9QC72V" />
     <PackageReference Include="Penguin.Workers.Repositories" Version="2.0.3-T9QC72V" />
     <PackageReference Include="Penguin.Workers.Abstractions" Version="2.0.1-T9QC72V" />
-    <PackageReference Include="Penguin.Cms.Modules.Admin" Version="1.0.1-T9QE7NI" />
+    <PackageReference Include="Penguin.Cms.Modules.Admin" Version="1.0.1-T9QP5HE" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="wwwroot\**\*" />
