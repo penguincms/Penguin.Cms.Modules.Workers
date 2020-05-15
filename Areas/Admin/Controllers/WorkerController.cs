@@ -19,7 +19,7 @@ using System.Linq;
 
 namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 {
-    [RequiresRole(RoleNames.SysAdmin)]
+    [RequiresRole(RoleNames.SYS_ADMIN)]
     [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters")]
     public class WorkerController : AdminController
     {
