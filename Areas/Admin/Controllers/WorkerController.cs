@@ -8,6 +8,7 @@ using Penguin.Persistence.Abstractions.Interfaces;
 using Penguin.Reflection;
 using Penguin.Security.Abstractions.Attributes;
 using Penguin.Security.Abstractions.Constants;
+using Penguin.Security.Abstractions.Interfaces;
 using Penguin.Web.Security.Attributes;
 using Penguin.Workers.Abstractions;
 using Penguin.Workers.Repositories;
@@ -28,7 +29,7 @@ namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 
         protected WorkerRepository WorkerRepository { get; set; }
 
-        public WorkerController(WorkerRepository workerRepository, IRepository<LogEntry> logEntryRepository, IServiceProvider serviceProvider, FileService fileService) : base(serviceProvider)
+        public WorkerController(WorkerRepository workerRepository, IRepository<LogEntry> logEntryRepository, IServiceProvider serviceProvider, FileService fileService, IUserSession userSession) : base(serviceProvider, userSession)
         {
             FileService = fileService;
             LogEntryRepository = logEntryRepository;
