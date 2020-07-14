@@ -12,6 +12,11 @@ namespace Penguin.Cms.Modules.Workers.DependencyInjection
     {
         public void RegisterDependencies(IServiceRegister serviceRegister)
         {
+            if (serviceRegister is null)
+            {
+                throw new ArgumentNullException(nameof(serviceRegister));
+            }
+
             foreach (Type workerType in TypeFactory.GetAllImplementations<IWorker>())
             {
                 serviceRegister.Register(workerType, workerType, ServiceLifetime.Scoped);
