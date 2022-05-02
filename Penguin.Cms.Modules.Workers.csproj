@@ -14,10 +14,10 @@
   <ItemGroup>
     <Content Remove="wwwroot\**\*" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.1" />
-    <PackageReference Include="Penguin.Workers.Abstractions" Version="5.0.6-TAW5FE4" />
-    <PackageReference Include="Penguin.Cms.Logging" Version="5.0.6-TAW5FE4" />
-    <PackageReference Include="Penguin.Workers.Repositories" Version="5.0.6-TAW5FE4" />
-    <PackageReference Include="Penguin.Cms.Modules.Admin" Version="5.0.6-TAW5TL7" />
+    <PackageReference Include="Penguin.Workers.Abstractions" Version="5.0.6-TAWVHS0" />
+    <PackageReference Include="Penguin.Cms.Logging" Version="5.0.6-TAWVHS0" />
+    <PackageReference Include="Penguin.Workers.Repositories" Version="5.0.6-TAWVHS0" />
+    <PackageReference Include="Penguin.Cms.Modules.Admin" Version="5.0.6-TAWW2RL" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="wwwroot\**\*" />
