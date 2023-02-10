@@ -22,6 +22,7 @@ namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
     public class WorkerController : AdminController
     {
         protected FileService FileService { get; set; }
+
         protected IRepository<LogEntry> LogEntryRepository { get; set; }
 
         protected WorkerRepository WorkerRepository { get; set; }
