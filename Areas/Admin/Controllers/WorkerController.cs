@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Penguin.Cms.Logging.Entities;
+using Penguin.Cms.Logging;
 using Penguin.Cms.Logging.Extensions;
 using Penguin.Cms.Modules.Admin.Areas.Admin.Controllers;
 using Penguin.Cms.Web.Extensions;
 using Penguin.Files.Services;
 using Penguin.Persistence.Abstractions.Interfaces;
 using Penguin.Reflection;
-using Penguin.Security.Abstractions.Attributes;
 using Penguin.Security.Abstractions.Constants;
 using Penguin.Security.Abstractions.Interfaces;
 using Penguin.Web.Security.Attributes;
@@ -14,14 +13,12 @@ using Penguin.Workers.Abstractions;
 using Penguin.Workers.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 
 namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 {
     [RequiresRole(RoleNames.SYS_ADMIN)]
-    [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters")]
     public class WorkerController : AdminController
     {
         protected FileService FileService { get; set; }
@@ -42,31 +39,28 @@ namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 
             foreach (IWorker? thisWorker in ExistingWorkers)
             {
-                if (thisWorker != null)
-                {
-                    thisWorker.UpdateLastRun();
-                }
+                thisWorker?.UpdateLastRun();
             }
 
-            return this.View(ExistingWorkers);
+            return View(ExistingWorkers);
         }
 
         public ActionResult Log(string WorkerType)
         {
-            List<LogEntry> Entries = this.LogEntryRepository.GetByCaller(WorkerType);
-            return this.View("logs", Entries);
+            List<LogEntry> Entries = LogEntryRepository.GetByCaller(WorkerType);
+            return View("logs", Entries);
         }
 
         public ActionResult Logs()
         {
-            List<LogEntry> Entries = this.LogEntryRepository.All.ToList();
-            return this.View(Entries);
+            List<LogEntry> Entries = LogEntryRepository.All.ToList();
+            return View(Entries);
         }
 
         public ActionResult LogSessions(string Session)
         {
-            List<LogEntry> Entries = this.LogEntryRepository.GetBySession(Session);
-            return this.View(Entries);
+            List<LogEntry> Entries = LogEntryRepository.GetBySession(Session);
+            return View(Entries);
         }
 
         public ActionResult Run(string WorkerName)
@@ -83,7 +77,7 @@ namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 
             this.AddMessage("Worker has completed");
 
-            return this.Redirect(this.HttpContext.Request.Headers["Referer"].ToString() ?? "/Admin/Worker/ListWorkers");
+            return Redirect(HttpContext.Request.Headers["Referer"].ToString() ?? "/Admin/Worker/ListWorkers");
         }
     }
 }
