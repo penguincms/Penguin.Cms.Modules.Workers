@@ -15,12 +15,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Loxifi;
+
 
 namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 {
     [RequiresRole(RoleNames.SYS_ADMIN)]
     public class WorkerController : AdminController
     {
+        public static TypeFactory TypeFactory { get; set; } = new TypeFactory(new TypeFactorySettings());
         protected FileService FileService { get; set; }
 
         protected IRepository<LogEntry> LogEntryRepository { get; set; }
