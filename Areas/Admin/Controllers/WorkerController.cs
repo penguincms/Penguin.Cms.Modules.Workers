@@ -22,9 +22,7 @@ namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 {
     [RequiresRole(RoleNames.SYS_ADMIN)]
     public class WorkerController : AdminController
-    {
-        public static TypeFactory TypeFactory { get; set; } = new TypeFactory(new TypeFactorySettings());
-        protected FileService FileService { get; set; }
+    {        protected FileService FileService { get; set; }
 
         protected IRepository<LogEntry> LogEntryRepository { get; set; }
 
@@ -39,7 +37,7 @@ namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 
         public ActionResult ListWorkers()
         {
-            List<IWorker?> ExistingWorkers = TypeFactory.GetAllImplementations<IWorker>().Select(t => ServiceProvider.GetService(t) as IWorker).ToList();
+            List<IWorker?> ExistingWorkers = TypeFactory.Default.GetAllImplementations<IWorker>().Select(t => ServiceProvider.GetService(t) as IWorker).ToList();
 
             foreach (IWorker? thisWorker in ExistingWorkers)
             {
@@ -69,7 +67,7 @@ namespace Penguin.Cms.Modules.Workers.Areas.Admin.Controllers
 
         public ActionResult Run(string WorkerName)
         {
-            foreach (Type t in TypeFactory.GetAllImplementations(typeof(IWorker)))
+            foreach (Type t in TypeFactory.Default.GetAllImplementations(typeof(IWorker)))
             {
                 if (t.FullName == WorkerName)
                 {

@@ -10,7 +10,6 @@ namespace Penguin.Cms.Modules.Workers.DependencyInjection
 {
     public class WorkerRegistrations : IRegisterDependencies
     {
-        public static TypeFactory TypeFactory { get; private set; } = new TypeFactory(new TypeFactorySettings());
         public void RegisterDependencies(IServiceRegister serviceRegister)
         {
             if (serviceRegister is null)
@@ -18,7 +17,7 @@ namespace Penguin.Cms.Modules.Workers.DependencyInjection
                 throw new ArgumentNullException(nameof(serviceRegister));
             }
 
-            foreach (Type workerType in TypeFactory.GetAllImplementations<IWorker>())
+            foreach (Type workerType in TypeFactory.Default.GetAllImplementations<IWorker>())
             {
                 serviceRegister.Register(workerType, workerType, ServiceLifetime.Scoped);
             }
